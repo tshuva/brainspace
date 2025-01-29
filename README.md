@@ -8,10 +8,12 @@ This project is a take-home assignment where you will build a real-time web-base
 
 Your task is to design and implement a working solution, making decisions around data handling, communication between the client and server, and frontend state management.
 
-### **Extra Credit (Optional Enhancements)**  
-If time permits, add a **second chart** that displays a **moving average over the past 1 second (100 samples)** for each channel.  
+*We do not ask you to invest more than **4 hours** in this project. Focus on delivering value, and clearly label the code where you would have done things differently if you had a week to complete the task.*
 
-Finally, document any trade-offs and design choices you made due to time constraints.
+It's OK to use AI - see [below](#generative-ai).
+
+### **If you have extra time (Optional Enhancements)**  
+If time permits, add a **second chart** that displays a **moving average over the past 1 second (100 samples)** for each channel.
 
 ---
 
@@ -34,9 +36,9 @@ Finally, document any trade-offs and design choices you made due to time constra
 - Add a **second chart** that displays a **1-second moving average** for each channel.
 - Decide where and how to compute the moving average while keeping performance optimal.
 
-### Generative AI
+### <a name="generative-ai"></a>Generative AI
 
-You can use generative AI to help you with the project, but if so, please share the relevant chats with a public link or screenshot/download.
+You can use generative AI to help you with the project, but if so, **please share the relevant chats** with a public link or screenshot/download.
 
 ---
 
