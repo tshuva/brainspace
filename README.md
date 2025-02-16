@@ -45,11 +45,11 @@ You can use generative AI to help you with the project, but if so, **please shar
 
 ## **Setup Instructions**  
 
-### **1. Clone the Repository**  
+### For and Clone the Repository**  
 Fork this repository and clone it to your local machine:
 ```sh
-$ git clone https://github.com/YOUR_USERNAME/real-time-dashboard.git
-$ cd real-time-dashboard
+$ git clone https://github.com/YOUR_USERNAME/takehome-fullstack-fe.git
+$ cd takehome-fullstack-fe
 ```
 
 ### Run the mock data generator
