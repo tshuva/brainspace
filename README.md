@@ -35,6 +35,7 @@ If time permits, add a **second chart** that displays a **moving average over th
 ### **Extra Credit (Optional)**  
 - Add a **second chart** that displays a **1-second moving average** for each channel.
 - Decide where and how to compute the moving average while keeping performance optimal.
+- Add any other cool features you think might be nice, either fully implementing them or adding a placeholder and comments.
 
 ### <a name="generative-ai"></a>Generative AI
 
