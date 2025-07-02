@@ -8,17 +8,17 @@ import TimeFilter from "./TimeFilter";
 
 const filterFunctions = {
   default: (arr, _) => arr,
-  messages: (arr, n) => arr.slice(-n),
-  seconds: (arr, t) => arr.slice(-t * 60),
+  messages: (arr, n) => arr.slice(0, n),
+  seconds: (arr, t) => arr.slice(0, t * 60),
 };
 
 const chartOptions = {
-  'pie': { name: 'Pie Chart', icon: PieChart, description: 'Value frequency distribution', chart: (msg) => <Pie data={msg} /> },
-  'line': { name: 'Line Column Chart', icon: TrendingUp, description: 'Row trends over column\nbast with low no of msgs', chart: (msg) => <Line data={msg} /> },
-  'line-colum': { name: 'Line Mesages Chart', icon: TrendingUp, description: 'Row trends over mesages', chart: (msg) => <LineOverLastMsgs data={msg} /> },
   'bar': { name: 'Bar Chart', icon: BarChart3, description: 'Column totals', chart: (msg) => <Bar data={msg} /> },
   'radar': { name: 'Radar Chart', icon: Radar, description: 'Row averages comparison', chart: (msg) => <RadarChart data={msg} /> },
   'heatmap': { name: 'Heatmap', icon: Grid3X3, description: 'Value intensity map', chart: (msg) => <Heatmap data={msg} /> },
+  'pie': { name: 'Pie Chart', icon: PieChart, description: 'Value frequency distribution', chart: (msg) => <Pie data={msg} /> },
+  'line-colum': { name: 'Line Mesages Chart', icon: TrendingUp, description: 'Row trends over mesages', chart: (msg) => <LineOverLastMsgs data={msg} /> },
+  'line': { name: 'Line Column Chart', icon: TrendingUp, description: 'Row trends over column\nbast with low no of msgs', chart: (msg) => <Line data={msg} /> },
 } as const;
 
 type ChartId = keyof typeof chartOptions;
@@ -26,9 +26,9 @@ type ChartOpt = typeof chartOptions[ChartId]
 
 const filterDate = (filter) => filter.type === 'dateRange'
 
-const MainWindow = () => {
-  const [activeChart, setActiveChart] = useState<ChartId>('pie');
-  const [filterConfig, setFilterConfig] = useState<FilterConfig>({ type: "messages", value: 10 } as FilterConfig);
+const MainWindow = ({ defultMsgs }) => {
+  const [activeChart, setActiveChart] = useState<ChartId>('bar');
+  const [filterConfig, setFilterConfig] = useState<FilterConfig>({ type: "default", value: 10 } as FilterConfig);
 
   const {
     data: filteredData = [],
@@ -47,13 +47,12 @@ const MainWindow = () => {
     staleTime: Infinity,
   });
 
-  const { data: liveMessages = [] } = useQuery<Messages>({ queryKey: ['messages'], queryFn: () => [], staleTime: Infinity, initialData: [] as number[][], });
 
   const messages = useMemo(() =>
-    (filterDate(filterConfig)) ? filteredData : filterFunctions[filterConfig.type](liveMessages, filterConfig.value)
-    , [filteredData, liveMessages]);
+    (filterDate(filterConfig)) ? filteredData : filterFunctions[filterConfig.type](defultMsgs, filterConfig.value)
+    , [filteredData, defultMsgs]);
 
-  console.log(liveMessages);
+  console.log(defultMsgs);
 
   if (isFilteredDataLoading || isFilteredDataFetching) return <div>Loading...</div>;
   if (error instanceof Error) return <div>An error has occurred: {error.message}</div>;

@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
-import { ResponsivePie } from '@nivo/pie';
-import { ResponsiveLine } from '@nivo/line';
-import { ResponsiveBar } from '@nivo/bar';
+import { ResponsivePieCanvas } from '@nivo/pie';
+import { ResponsiveLineCanvas } from '@nivo/line';
+import { ResponsiveBarCanvas } from '@nivo/bar';
 import { ResponsiveRadar } from '@nivo/radar';
-import { ResponsiveHeatMap } from '@nivo/heatmap';
+import { ResponsiveHeatMapCanvas } from '@nivo/heatmap';
 export type Messages = number[][]
 
 
@@ -21,7 +21,7 @@ const Pie = ({ data }: { data: Messages }) => {
     , initialPie);
 
   return (
-    <ResponsivePie
+    <ResponsivePieCanvas
       data={pie}
       margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
       innerRadius={0.5}
@@ -47,7 +47,7 @@ const Line = ({ data }: { data: Messages }) => {
   }));
 
   return (
-    <ResponsiveLine
+    <ResponsiveLineCanvas
       data={lineData}
       margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
       axisBottom={{
@@ -74,7 +74,7 @@ const Line = ({ data }: { data: Messages }) => {
 };
 
 const LineOverLastMsgs = ({ data }: { data: Messages }) => {
-  const CHANNELS_NUMBER = data[0]?.length || 0;
+  const CHANNELS_NUMBER = 10;
 
   const [selectedChannels, setSelectedChannels] = useState(
     new Array(CHANNELS_NUMBER).fill(true)
@@ -111,7 +111,7 @@ const LineOverLastMsgs = ({ data }: { data: Messages }) => {
         ))}
       </div>
 
-      <ResponsiveLine
+      <ResponsiveLineCanvas
         data={formattedData.filter((_, i) => selectedChannels[i])}
         margin={{ top: 30, right: 30, bottom: 40, left: 50 }}
         xScale={{ type: 'linear' }}
@@ -136,7 +136,7 @@ const Bar = ({ data }: { data: Messages }) => {
   }));
 
   return (
-    <ResponsiveBar
+    <ResponsiveBarCanvas
       data={barData}
       keys={['value']}
       indexBy="column"
@@ -234,7 +234,7 @@ const Heatmap = ({ data }: { data: Messages }) => {
   );
 
   return (
-    <ResponsiveHeatMap
+    <ResponsiveHeatMapCanvas
       data={heatmap.heatmap}
       margin={{ top: 60, right: 90, bottom: 60, left: 90 }}
       valueFormat=">-.2s"

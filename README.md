@@ -57,3 +57,5 @@ The client is built using [pnpm](https://pnpm.io/) and [react](https://www.youtu
 
 The client showcases multiple types of charts to visualize the incoming data. This variety demonstrates the system’s flexibility and aims to provide different viewing options for end users.
 
+#Note:
+maybe its because my PC is old  , but the diffrent charts is ordered left-right by most responsive to large dataset, i recomned to set filters before clicking on them  

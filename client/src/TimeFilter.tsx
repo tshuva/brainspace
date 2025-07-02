@@ -18,7 +18,7 @@ type TimeFilterProps = {
 const TimeFilter = ({ setConfig, config }: TimeFilterProps) => {
   const queryClient = useQueryClient();
 
-  const [filterType, setFilterType] = useState<FilterType>('messages');
+  const [filterType, setFilterType] = useState<FilterType>('default');
   const [filterValue, setFilterValue] = useState(10);
   const [dateRange, setDateRange] = useState({ from: '', to: '' });
 
@@ -31,9 +31,9 @@ const TimeFilter = ({ setConfig, config }: TimeFilterProps) => {
   };
 
   const handleReset = () => {
-    setFilterType('messages');
+    setFilterType('default');
     setFilterValue(10);
-    setConfig({ type: "messages", value: 10 })
+    setConfig({ type: "default", })
   };
 
   return (
@@ -44,7 +44,16 @@ const TimeFilter = ({ setConfig, config }: TimeFilterProps) => {
       </div>
 
       <div className="flex flex-wrap gap-4 mb-4">
-
+        <button
+          onClick={() => setFilterType('default')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${filterType === 'default'
+            ? 'bg-blue-600 text-white'
+            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            }`}
+        >
+          <Database size={16} />
+          All Data
+        </button>
         <button
           onClick={() => setFilterType('messages')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${filterType === 'messages'
@@ -64,16 +73,6 @@ const TimeFilter = ({ setConfig, config }: TimeFilterProps) => {
         >
           <Clock size={16} />
           By Last Seconds
-        </button>
-        <button
-          onClick={() => setFilterType('default')}
-          className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${filterType === 'default'
-            ? 'bg-blue-600 text-white'
-            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}
-        >
-          <Database size={16} />
-          All Data
         </button>
         <button
           onClick={() => setFilterType('dateRange')}

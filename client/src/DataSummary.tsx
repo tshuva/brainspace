@@ -15,7 +15,7 @@ const DataSummary = ({ data }) => (
         Most Recent Entry
       </h4>
       <div className="flex flex-wrap gap-2">
-        {(data[data.length - 1] || []).map((val, idx) => (
+        {(data[0] || []).map((val, idx) => (
           <span
             key={idx}
             className="inline-flex items-center px-3 py-2 bg-white rounded-lg text-sm font-medium text-gray-700 border border-gray-200 shadow-sm hover:bg-gray-50 hover:border-gray-300 transition-all duration-200"
