@@ -16,7 +16,7 @@ db.run("CREATE TABLE IF NOT EXISTS messages (id INTEGER PRIMARY KEY AUTOINCREMEN
 const messageBus = new EventEmitter();
 
 Bun.connect({
-  hostname: "localhost",
+  hostname: "datagen",
   port: 9000,
   socket: {
     data(socket, data) {
