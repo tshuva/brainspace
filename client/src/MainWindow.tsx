@@ -52,7 +52,6 @@ const MainWindow = ({ defultMsgs }) => {
     (filterDate(filterConfig)) ? filteredData : filterFunctions[filterConfig.type](defultMsgs, filterConfig.value)
     , [filteredData, defultMsgs]);
 
-  console.log(defultMsgs);
 
   if (isFilteredDataLoading || isFilteredDataFetching) return <div>Loading...</div>;
   if (error instanceof Error) return <div>An error has occurred: {error.message}</div>;
