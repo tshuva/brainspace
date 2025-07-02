@@ -53,4 +53,5 @@ The server is built using [Bun](https://bun.sh/) and the [Elysia](https://elysia
 Note: Inside the server folder, you will find an example demonstrating WebTransport failure handling.
 
 ### Client
+The client is built using [pnpm](https://pnpm.io/) and [react](https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=0gcJCfwAo7VqN5tD) .
 The client showcases multiple types of charts to visualize the incoming data. This variety demonstrates the system’s flexibility and aims to provide different viewing options for end users.
