@@ -1,0 +1,26 @@
+services:
+  datagen:
+    build: ./gen
+    ports:
+      - "9000:9000"
+    working_dir: /app
+    command: ["node", "datagen.js"]
+  
+  backend:
+    build: ./bk
+    ports:
+      - "8000:8000"
+    depends_on:
+      - datagen
+    working_dir: /app
+    restart: on-failure
+    command: ["bun", "run", "index.js"]
+  
+  client:
+    build: ./client
+    ports:
+      - "3001:3001"
+    working_dir: /app
+    command: ["pnpm", "run", "dev"]
+    depends_on:
+      - backend
