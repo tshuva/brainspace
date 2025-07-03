@@ -26,7 +26,7 @@ type ChartOpt = typeof chartOptions[ChartId]
 
 const filterDate = (filter) => filter.type === 'dateRange'
 
-const MainWindow = ({ defultMsgs }) => {
+const MainWindow = ({ defaultMessages, setMsgs }) => {
   const [activeChart, setActiveChart] = useState<ChartId>('bar');
   const [filterConfig, setFilterConfig] = useState<FilterConfig>({ type: "default", value: 10 } as FilterConfig);
 
@@ -38,8 +38,12 @@ const MainWindow = ({ defultMsgs }) => {
   } = useQuery({
     queryKey: ['filteredMessages', filterConfig?.dateRange?.from, filterConfig?.dateRange?.to],
     queryFn: async () => {
+      const params = new URLSearchParams({
+        from: new Date(filterConfig.dateRange.from).toISOString(),
+        to: new Date(filterConfig.dateRange.to).toISOString(),
+      });
       const res = await fetch(
-        `http://localhost:8000/messages?from=${filterConfig.dateRange.from}&to=${filterConfig.dateRange.to}`
+        `http://localhost:8000/messages?${params.toString()}`
       ).then(r => r.json());
       return res.map(x => JSON.parse(x.value)) as Messages; // using effect.ts?
     },
@@ -49,8 +53,8 @@ const MainWindow = ({ defultMsgs }) => {
 
 
   const messages = useMemo(() =>
-    (filterDate(filterConfig)) ? filteredData : filterFunctions[filterConfig.type](defultMsgs, filterConfig.value)
-    , [filteredData, defultMsgs]);
+    (filterDate(filterConfig)) ? filteredData : filterFunctions[filterConfig.type](defaultMessages, filterConfig.value)
+    , [filteredData, defaultMessages]);
 
 
   if (isFilteredDataLoading || isFilteredDataFetching) return <div>Loading...</div>;
@@ -72,7 +76,7 @@ const MainWindow = ({ defultMsgs }) => {
         {/* Time Filter */}
         <div className="flex justify-center mb-8">
           <div className="bg-white rounded-xl shadow-lg p-4 border border-slate-200">
-            <TimeFilter setConfig={setFilterConfig} config={filterConfig} />
+            <TimeFilter setConfig={setFilterConfig} setMsgs={setMsgs} />
           </div>
         </div>
 

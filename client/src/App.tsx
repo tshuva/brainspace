@@ -7,7 +7,7 @@ import type { Messages } from './Charts';
 
 const App = () => {
   const queryClient = useQueryClient();
-  const [msgs, setMsgs] = useState<Messages>([])
+  const [messages, setMessages] = useState<Messages>([])
   React.useEffect(() => {
     const websocket = new WebSocket('ws://localhost:8000/stream')
     websocket.onopen = () => {
@@ -16,7 +16,7 @@ const App = () => {
     websocket.onmessage = (e) => {
       try {
         const msg = JSON.parse(JSON.parse(e.data)) as number[]
-        setMsgs((old = []) => [msg, ...old])
+        setMessages((old = []) => [msg, ...old])
       } catch (error) {
         console.error(error);
       }
@@ -29,7 +29,7 @@ const App = () => {
   }, [queryClient])
 
   return (
-    <MainWindow defultMsgs={msgs} />
+    <MainWindow defaultMessages={messages} setMsgs={setMessages} />
   )
 }
 

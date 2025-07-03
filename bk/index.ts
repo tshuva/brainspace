@@ -71,7 +71,6 @@ const app = new Elysia().use(cors({
     const fromTime = query.from ? new Date(query.from).getTime() : 0;
     const toTime = query.to ? new Date(query.to).getTime() : Date.now();
 
-    console.log({ fromTime, toTime })
     const stmt = db.prepare(`
     SELECT * FROM messages
     WHERE time BETWEEN ? AND ?
@@ -102,4 +101,3 @@ const app = new Elysia().use(cors({
   }
   )
   .listen(8000)
-

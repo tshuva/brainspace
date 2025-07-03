@@ -6,17 +6,16 @@ type FilterType = 'default' | 'messages' | 'seconds' | 'dateRange'
 
 export type FilterConfig = {
   type: FilterType;
-  value: number;
+  value?: number;
   dateRange?: { from?: string; to?: string };
 };
 
 type TimeFilterProps = {
   setConfig: (config: FilterConfig) => void;
-  config: FilterConfig
+  setMsgs: React.Dispatch<React.SetStateAction<Messages>>
 };
 
-const TimeFilter = ({ setConfig, config }: TimeFilterProps) => {
-  const queryClient = useQueryClient();
+const TimeFilter = ({ setConfig, setMsgs }: TimeFilterProps) => {
 
   const [filterType, setFilterType] = useState<FilterType>('default');
   const [filterValue, setFilterValue] = useState(10);
@@ -33,7 +32,7 @@ const TimeFilter = ({ setConfig, config }: TimeFilterProps) => {
   const handleReset = () => {
     setFilterType('default');
     setFilterValue(10);
-    setConfig({ type: "default", })
+    setConfig({ type: "default" })
   };
 
   return (
@@ -144,10 +143,7 @@ const TimeFilter = ({ setConfig, config }: TimeFilterProps) => {
           Reset Filter
         </button>
         <button
-          onClick={() => queryClient.setQueryData<Messages>(['messages'], () => {
-            console.log("clearing");
-            return []
-          })}
+          onClick={() => setMsgs([])}
           className="bg-red-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-red-900 transition-colors"
         >
           Clear Messages
